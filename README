@@ -1,5 +1,8 @@
 This is the ReadMe file for HFJV (Hassle Free Java Validator).
 
-If needed, this can / will be modified later.
+1. The user guide is in progress. I shall be uploading it as and when it is complete. It can serve as a tutorial.
+2. As of now, for working with HFJV, you can download the hfjv.jar file from the home location of this repository https://github.com/itsraghz/HFJV
+3. Only dependency the HFJV needs is the log4j jar. You can use the latest (I had used log4j-1.2.15.jar) and also placing it in the same location for the users who do NOT have the log4j jar with them.
 
-I am also slowly practicing the git commands this way!
+ - M Raghavan alias Saravanan
+   27 Nov 2011 Sunday 4 35 PM IST
