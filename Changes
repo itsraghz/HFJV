@@ -1,0 +1,5 @@
+7Dec2011
+=======
+tuned for HFJVAdmin, which is yet to be checked into git
+Included SelfEvaluate() on all constraints
+Included dataTypeList in GlobalUtil for all available datatypes
