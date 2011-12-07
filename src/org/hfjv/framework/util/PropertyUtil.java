@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Set;
 
+import org.hfjv.framework.Logger;
+import org.hfjv.framework.LoggerFactory;
+
 /**
  * <p>
  * An utility class to deal with the configurable properties
@@ -25,6 +28,14 @@ public class PropertyUtil
 	 * </p>
 	 */
 	private static String HFJV_PROPERTY_FILE = "hfjv.properties";
+	
+	/**
+	 * <p>
+	 * A private class level logger instance of this class
+	 * </p>
+	 */
+	private static Logger logger = LoggerFactory.getInstance().
+																	getLogger(PropertyUtil.class);	
 
 	/**
 	 * <p>
@@ -131,6 +142,9 @@ public class PropertyUtil
 	 */
 	public static Properties getProperties(String fileName, boolean listProperties)
 	{
+		
+		final String THIS_METHOD_NAME = "getProperties(fileName, listProperties) - ";	
+		
 		InputStream is = Thread.currentThread().getContextClassLoader()
 																	.getResourceAsStream(fileName);
 
@@ -142,14 +156,15 @@ public class PropertyUtil
 				_properties = new Properties();
 				_properties.load(is);
 			}catch(IOException ioException) {
-				System.err.println("IOException in loading properties " +
-					"from the file -- [" + fileName + "]");
-				ioException.printStackTrace();
+				logger.error(THIS_METHOD_NAME + 
+						"IOException in loading properties from the file -- [" + fileName + "]");
+				//ioException.printStackTrace();
+				logger.error(ioException.getMessage(), ioException);
 			}
 		}
 		else
 		{
-			System.err.println("Unable to load the properties file -- ["
+			logger.error(THIS_METHOD_NAME+ "Unable to load the properties file -- ["
 								+ fileName +"]");
 			System.exit(1);
 		}
@@ -191,6 +206,8 @@ public class PropertyUtil
 	public static void checkAndListElements (Properties _properties,
 																				String backingFileName)
 	{
+		final String THIS_METHOD_NAME = "checkAndListElements() - ";
+		
 		String backingFileNameToDisplay =
 												getBackingFileNameForDisplay(backingFileName);
 
@@ -198,12 +215,14 @@ public class PropertyUtil
 		{
 			if(_properties.size() <= 0)
 			{
-				System.err.println("Looks like the properties file"
+				logger.error(THIS_METHOD_NAME + "Looks like the properties file"
 					+ backingFileNameToDisplay + " is empty!");
 			}
 			else
 			{
+				//TODO: further R & D on redirecting to logger stream
 				_properties.list(System.out);
+				//_properties.list(logger);
 			}
 		}
 	}
@@ -237,11 +256,13 @@ public class PropertyUtil
 	public static void checkAndListDetails(Properties _properties,
 																					String backingFileName)
 	{
+		final String THIS_METHOD_NAME = "checkAndListDetails() - ";
+		
 		String backingFileNameToDisplay =
 											getBackingFileNameForDisplay(backingFileName);
 
-		System.out.println();
-		System.out.println(" ---------------- [INVESTIGATING "
+		logger.info("");
+		logger.info(THIS_METHOD_NAME + " ---------------- [INVESTIGATING "
 										+ backingFileNameToDisplay + " ] - START ------------------");
 
 		String errorMsg = null;
@@ -252,13 +273,14 @@ public class PropertyUtil
 			{
 				errorMsg = "Looks like the properties file "
 														+ backingFileNameToDisplay + " is empty!";
-				System.err.println(errorMsg);
+				logger.error(THIS_METHOD_NAME + errorMsg);
 				//System.exit(1);
 			}
 			else
 			{
 				int elementSize = _properties.size();
-				System.out.println("The properties file "
+				
+				logger.info(THIS_METHOD_NAME + "The properties file "
 														+ backingFileNameToDisplay + " is loaded with #"
 														+ elementSize + " entries..");
 			}
@@ -269,9 +291,9 @@ public class PropertyUtil
 			GlobalUtil.stopExecutionWithError(errorMsg);
 		}
 
-		System.out.println(" ---------------- [INVESTIGATING "
+		logger.info(THIS_METHOD_NAME + " ---------------- [INVESTIGATING "
 								+ backingFileNameToDisplay + " ] - END ------------------");
-		System.out.println();
+		logger.info("") ;
 
 	}
 
@@ -343,13 +365,16 @@ public class PropertyUtil
 	  */
 	public static void initKeySetIterator()
 	{
+		final String THIS_METHOD_NAME = "initKeySetIterator() - ";
+		
 		Set<Object> keys = _properties.keySet();
 
 		Iterator<Object> keySetIterator = keys.iterator();
 
 		if(null==keySetIterator)
 		{
-			System.err.println("An issue with preparing with the properties..");
+			logger.error(THIS_METHOD_NAME + 
+										"An issue with preparing with the properties..");
 		}
 
 		setKeySetIterator(keySetIterator);

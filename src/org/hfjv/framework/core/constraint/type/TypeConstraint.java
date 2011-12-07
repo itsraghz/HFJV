@@ -5,6 +5,10 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_TYPE;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_TYPE_CONSTRAINT;
 
+import java.io.Serializable;
+
+import org.hfjv.framework.Logger;
+import org.hfjv.framework.LoggerFactory;
 import org.hfjv.framework.core.constraint.Constraint;
 import org.hfjv.framework.core.exception.ValidatorException;
 import org.hfjv.framework.core.field.Field;
@@ -22,8 +26,23 @@ import org.hfjv.framework.util.NumberUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class TypeConstraint extends Constraint
+public class TypeConstraint extends Constraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -7459485624338077865L;
+	
+	/**
+	 * <p>
+	 * A private class level logger instance of this class
+	 * </p>
+	 */
+	private static Logger logger = LoggerFactory.getInstance().
+																				getLogger(TypeConstraint.class);
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor
@@ -65,7 +84,7 @@ public class TypeConstraint extends Constraint
 	 * @param value
 	 * 				the value to be evaluated
 	 * @param ValidatorException
-	 * 				any excpetions during validation
+	 * 				any exceptions during validation
 	 */
 	public static void evaluateType(Field field, String value, Constraint constraintObj)
 	throws ValidatorException
@@ -78,7 +97,7 @@ public class TypeConstraint extends Constraint
 		/* check if it is a number type */
 		if(GlobalUtil.isAllowedNumberType(fieldType))
 		{
-			if(!NumberUtil.isValidNumber(value, fieldType))
+			if(NumberUtil.isInvalidNumber(value, fieldType))
 			{
 				throw ExceptionHelper.getValidatorException(field, constraintObj, errorMsg);
 			}
@@ -92,5 +111,17 @@ public class TypeConstraint extends Constraint
 				throw ExceptionHelper.getValidatorException(field, constraintObj, errorMsg);
 			}
 		}
+	}
+
+	@Override
+	public void selfEvaluate() throws ValidatorException
+	{
+		final String THIS_METHOD_NAME = "selfEvaluate() - ";
+		
+		logger.enter(THIS_METHOD_NAME);
+		
+		//Method Body
+		
+		logger.exit(THIS_METHOD_NAME);
 	}
 }

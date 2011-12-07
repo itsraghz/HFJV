@@ -229,13 +229,13 @@ public class ValidatorAssembler
 		logger.enter(THIS_METHOD_NAME);
 
 		String globalFieldKey = HFJV_BASEKEY_WITH_SEPARATOR +
-					HFJV_FIELD_GLOBAL;
+																	HFJV_FIELD_GLOBAL;
 
 		ArrayList<String> globalKeysList = _propertyUtil.
 					getSpecificKeysAsList(globalFieldKey);
 
 		/* Validate the list for a safer side */
-		if(!CollectionUtil.isValidList(globalKeysList))
+		if(CollectionUtil.isInvalidList(globalKeysList))
 		{
 			printGlobalConstraintMapStats();
 			return;
@@ -259,7 +259,7 @@ public class ValidatorAssembler
 			 *
 			 * No point in adding an empty key!
 			 */
-			if(!StringUtil.isValidString(globalFieldValue))
+			if(StringUtil.isInvalidString(globalFieldValue))
 			{
 				continue;
 			}
@@ -637,7 +637,7 @@ public class ValidatorAssembler
 			tempFieldConstraintMap = new LinkedHashMap<Field, ArrayList<Constraint>>();
 
 			/** No point in proceeding further if the list is null or empty */
-			if(!CollectionUtil.isValidList(fieldsList))
+			if(CollectionUtil.isInvalidList(fieldsList))
 			{
 				continue;
 			}
@@ -675,11 +675,11 @@ public class ValidatorAssembler
 				 * BUT the actual field may NOT have got configured with
 				 * any values down.
 				 */
-				if(!CollectionUtil.isValidList(listOfFieldProps))
+				if(CollectionUtil.isInvalidList(listOfFieldProps))
 				{
 					logger.info(THIS_METHOD_NAME + " SKIPPING the field ['"
 													+ fieldName + "'], as it looks like it is NOT "
-													+ " configured wtih any values for validation.");
+													+ " configured with any values for validation.");
 
 					continue;
 				}
@@ -702,7 +702,7 @@ public class ValidatorAssembler
 												+fieldPropName+", ["+valueOfFieldProp+"]");
 
 					/** For efficient implementation */
-					if(!StringUtil.isValidString(valueOfFieldProp))
+					if(StringUtil.isInvalidString(valueOfFieldProp))
 					{
 						/* Continue with the next fieldProp */
 						continue;
@@ -931,7 +931,7 @@ public class ValidatorAssembler
 																	+ dependentFieldNameList);
 
 		/** No point in continuing further if the list is null or empty */
-		if(!CollectionUtil.isValidList(dependentFieldNameList))
+		if(CollectionUtil.isInvalidList(dependentFieldNameList))
 		{
 			return;
 		}
@@ -1173,7 +1173,7 @@ public class ValidatorAssembler
 	 * @return
 	 * 			an instance of the appropriate <tt>Constraint</tt>
 	 */
-	private static Constraint getConstraintForFieldProp(String fieldProp)
+	public static Constraint getConstraintForFieldProp(String fieldProp)
 	{
 		final String THIS_METHOD_NAME = "getConstraintForFieldProp() - ";
 

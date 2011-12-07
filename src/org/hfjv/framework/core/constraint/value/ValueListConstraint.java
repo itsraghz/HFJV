@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_VALUE_LIST;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_VALUELIST_CONSTRAINT;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.hfjv.framework.core.exception.ValidatorException;
@@ -20,8 +21,15 @@ import org.hfjv.framework.util.GlobalUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ValueListConstraint extends ValueConstraint
+public class ValueListConstraint extends ValueConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = 5147698753243358742L;
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor

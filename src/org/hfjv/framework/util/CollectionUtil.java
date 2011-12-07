@@ -195,4 +195,39 @@ public class CollectionUtil
 	{
 		return listObj.iterator();
 	}
+	
+	/**
+	 * <p>
+	 * This method returns true if the passed <tt>listToEvaluate</tt> is invalid.
+	 * It complements the functionality of {@link #isValidList(List)}
+	 *</p>
+	 *
+	 *
+ 	 * @param listToEvaluate
+	 * 		a <tt>List</tt> which needs to be checked
+	 *
+	 * @return
+	 * 		true if invalid; false otherwise
+	 */
+	public static boolean isInvalidList(List<? extends Object> listToEvaluate)
+	{
+		return !isValidList(listToEvaluate);
+	}
+	
+	/**
+	 * <p>
+	 * This method returns true if the passed <tt>mapToEvaluate</tt> is invalid.
+	 * It complements the functionality of {@link #isValidMap(Map)}
+	 *</p>
+	 *
+ 	 * @param mapToEvaluate
+	 * 		a <tt>Map</tt> which needs to be evaluated
+	 *
+	 * @return
+	 * 		true if invalid; false otherwise
+	 */
+	public static boolean isInvalidMap(Map<? extends Object, ? extends Object> mapToEvaluate)
+	{
+		return !isValidMap(mapToEvaluate);
+	}
 }

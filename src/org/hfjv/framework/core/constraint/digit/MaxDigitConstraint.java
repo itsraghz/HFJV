@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_DIGIT_MAX;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_MAXDIGIT_CONSTRAINT;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import org.hfjv.framework.core.exception.ValidatorException;
@@ -21,8 +22,15 @@ import org.hfjv.framework.util.GlobalUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class MaxDigitConstraint extends DigitConstraint
+public class MaxDigitConstraint extends DigitConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = 3771520930376553902L;
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor

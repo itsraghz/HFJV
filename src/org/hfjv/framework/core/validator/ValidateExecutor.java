@@ -54,7 +54,7 @@ public class ValidateExecutor
 
 		logger.enter(THIS_METHOD_NAME);
 
-		if(!StringUtil.isValidString(moduleName))
+		if(StringUtil.isInvalidString(moduleName))
 		{
 			throw new ValidatorException("Module name cannot be null!");
 		}
@@ -204,7 +204,7 @@ public class ValidateExecutor
 			 */
 
 			if(!field.isVerifiable() && field.isExcludedCharsSet() &&
-					!StringUtil.isValidString(field.getValue()))
+					StringUtil.isInvalidString(field.getValue()))
 			{
 				logger.info(THIS_METHOD_NAME + " special case - field is NOT"
 					+ " verifiable BUT its excludedCharsSet. Assigning a new"

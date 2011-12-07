@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_VALUE_NOTSTART;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_VALUERANGE_CONSTRAINT;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.hfjv.framework.core.exception.ValidatorException;
@@ -21,8 +22,15 @@ import org.hfjv.framework.util.GlobalUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ValueNotStartWithConstraint extends ValueConstraint
+public class ValueNotStartWithConstraint extends ValueConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -4086293711516347798L;
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor

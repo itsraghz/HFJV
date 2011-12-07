@@ -417,4 +417,40 @@ public class StringUtil
 		return sameCharRepeats;
 	}
 
+	/**
+	 * <p>
+	 * This method returns true if the passed <tt>strToCheck</tt> is invalid, 
+	 * false otherwise. It complements the functionality of {@link #isValidString(String)}
+	 * method.
+	 * </p>
+	 * 
+	 * @param strToCheck
+	 * 				the input string element to be evaluated
+	 * 
+	 * @return
+	 * 			true if invalid; false otherwise
+	 */
+	public static boolean isInvalidString(String strToCheck)
+	{
+		return !isValidString(strToCheck);
+	}
+
+	/**
+	 * <p>
+	 * This method returns true if the passed <tt>strArrayToCheck</tt> is invalid, 
+	 * false otherwise. It complements the functionliaty of {@link #isValidStrArray(String[])}
+	 * method
+	 * </p>
+	 * 
+	 * @param strArrayToCheck
+	 * 				the input string array to be evaluated
+	 * 
+	 * @return
+	 * 			true if invalid; false otherwise
+	 */
+	public static boolean isInvliadStrArray(String[] strArrayToCheck)
+	{
+		return !isValidStrArray(strArrayToCheck);
+	}
+	
 }

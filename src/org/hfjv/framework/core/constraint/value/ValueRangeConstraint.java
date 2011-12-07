@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_VALUE_RANGE;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_VALUERANGE_CONSTRAINT;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -27,9 +28,14 @@ import org.hfjv.framework.util.StringUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ValueRangeConstraint extends ValueConstraint
+public class ValueRangeConstraint extends ValueConstraint implements Serializable
 {
-
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -2626007671819149181L;
 	/**
 	 * <p>
 	 * A private class level logger instance of this class
@@ -62,7 +68,7 @@ public class ValueRangeConstraint extends ValueConstraint
 
 	public static void evaluate(String rangeSeparatedValue) throws ValidatorException
 	{
-		if(!StringUtil.isValidString(rangeSeparatedValue) ||
+		if(StringUtil.isInvalidString(rangeSeparatedValue) ||
 			rangeSeparatedValue.indexOf(GlobalUtil.VALUE_RANGE_SEPARATOR)==-1)
 		{
 			throw new ValidatorException("The range value should be in the "
@@ -117,7 +123,7 @@ public class ValueRangeConstraint extends ValueConstraint
 		String dataTypeOfField = field.getType();
 		
 		/* For a safer side */
-		if(!StringUtil.isValidString(dataTypeOfField))
+		if(StringUtil.isInvalidString(dataTypeOfField))
 		{
 			dataTypeOfField = GlobalUtil.DATATYPE_STRING;
 		}
@@ -167,7 +173,7 @@ public class ValueRangeConstraint extends ValueConstraint
 		
 		String sourceValue = getFieldValue(field);
 
-		if(!StringUtil.isValidString(sourceValue))
+		if(StringUtil.isInvalidString(sourceValue))
 		{
 			throw new ValidatorException(field.getDisplayName()
 							+ " value cannot be null");
@@ -239,7 +245,7 @@ public class ValueRangeConstraint extends ValueConstraint
 		//value may contain a sign bit!
 		String sourceValue = GlobalUtil.excludeSignBit(sourceValueActual); 
 		
-		if(!StringUtil.isValidString(sourceValue))
+		if(StringUtil.isInvalidString(sourceValue))
 		{
 			throw new ValidatorException(field.getDisplayName()
 				+ " value cannot be null");

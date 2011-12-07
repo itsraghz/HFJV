@@ -153,6 +153,24 @@ public class GlobalUtil
 
 	/**
 	 * <p>
+	 * A private class level constant to hold the list of available data types
+	 * </p>
+	 */
+	private static final String[] DATA_TYPE_ARRAY =
+			new String[] {
+				DATATYPE_DATE,
+				DATATYPE_HEXADECIMAL,
+				DATATYPE_NUMBER_BIGDECIMAL,
+				DATATYPE_NUMBER_BIGINT,
+				DATATYPE_NUMBER_BYTE,
+				DATATYPE_NUMBER_INT,
+				DATATYPE_NUMBER_LONG,
+				DATATYPE_NUMBER_SHORT,
+				DATATYPE_STRING
+		};
+	
+	/**
+	 * <p>
 	 * A class level constant to represent the <tt>comma</tt> as a token separator
 	 * </p>
 	 */
@@ -164,6 +182,13 @@ public class GlobalUtil
 	 * </p>
 	 */
 	public static final ArrayList<String> numberTypeList = new ArrayList<String>();
+
+	/**
+	 * <p>
+	 * A class level <tt>ArrayList</tt> to hold the <tt>available data types</tt>
+	 * </p>
+	 */
+	public static final ArrayList<String> dataTypeList = new ArrayList<String>();
 
 	/**
 	 * <p>
@@ -190,7 +215,7 @@ public class GlobalUtil
 	 */
 	public static boolean isAllowedNumberType(String fieldType)
 	{
-		if(!StringUtil.isValidString(fieldType))
+		if(StringUtil.isInvalidString(fieldType))
 		{
 			return false;
 		}
@@ -204,6 +229,7 @@ public class GlobalUtil
 	static {
 		initNumberTypeList();
 		initSignList();
+		initDataTypeList();
 	}
 
 	/**
@@ -364,9 +390,23 @@ public class GlobalUtil
 		{
 			numberTypeList.add(numberType);
 		}
-		logger.info(" --**-- Number types are initialized! --**--");
+		logger.info(" --|*|-- Number types are initialized! --|*|--");
 	}
 
+	/**
+	 * <p>
+	 * This method initializes the data type list
+	 * </p>
+	 */
+	private static void initDataTypeList()
+	{
+		for(String numberType : DATA_TYPE_ARRAY)
+		{
+			dataTypeList.add(numberType);
+		}
+		logger.info(" --|*|-- All Data types are initialized! --|*|--");
+	}
+	
 	/**
 	 * <p>
 	 * This method returns the display name (short name) of a field. It strips off the
@@ -383,7 +423,7 @@ public class GlobalUtil
 	{
 		String displayName = null;
 
-		if(!StringUtil.isValidString(fieldName))
+		if(StringUtil.isInvalidString(fieldName))
 		{
 			return fieldName;
 		}
@@ -437,7 +477,7 @@ public class GlobalUtil
 	{
 		ArrayList<String> listOfTokens = new ArrayList<String>();
 
-		if(!StringUtil.isValidString(tokenSeparatedStr))
+		if(StringUtil.isInvalidString(tokenSeparatedStr))
 		{
 			listOfTokens.add(tokenSeparatedStr);
 			return listOfTokens;
@@ -474,7 +514,7 @@ public class GlobalUtil
 	{
 		ArrayList<String> rangeValuesList = new ArrayList<String>();
 
-		if(!StringUtil.isValidString(rangeSeparatedValue))
+		if(StringUtil.isInvalidString(rangeSeparatedValue))
 		{
 			return rangeValuesList;
 		}
@@ -563,7 +603,7 @@ public class GlobalUtil
 	{
 		boolean isValidNumber = false;
 
-		if(!StringUtil.isValidString(numberInStr))
+		if(StringUtil.isInvalidString(numberInStr))
 		{
 			return false;
 		}
@@ -686,7 +726,7 @@ public class GlobalUtil
 	{
 		boolean isValidHexString = false;
 
-		if(!StringUtil.isValidString(inputStrInHex))
+		if(StringUtil.isInvalidString(inputStrInHex))
 		{
 			return false;
 		}
@@ -743,4 +783,12 @@ public class GlobalUtil
 	{
 		return numberTypeList;
 	}
+	
+	/**
+	 * @return the dataTypeList
+	 */
+	public static ArrayList<String> getDataTypeList() {
+		return dataTypeList;
+	}
+
 }

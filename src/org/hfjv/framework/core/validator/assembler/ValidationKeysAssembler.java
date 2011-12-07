@@ -100,12 +100,12 @@ public class ValidationKeysAssembler
 		initConstraintClassNameList();
 		initFieldConstraintTypeNameMap();
 
-		logger.info(StringUtil.getRepeatedChars("/*/", 75));
+		logger.info(StringUtil.getRepeatedChars("~", 75));
 
 		logger.info("["+ GlobalUtil.getAppName() +
 										"] -- ValidationKeys are assembled successfully! --");
 
-		logger.info(StringUtil.getRepeatedChars("/*/", 75));
+		logger.info(StringUtil.getRepeatedChars("~", 75));
 	}
 
 	/**
@@ -174,6 +174,8 @@ public class ValidationKeysAssembler
 	 */
 	public static Constraint getConstraintTypeInstance(String className)
 	{
+		final String THIS_METHOD_NAME = "getConstraintTypeInstance() - ";
+		
 		Constraint constraintObj = null;
 
 		boolean isError = false;
@@ -197,6 +199,24 @@ public class ValidationKeysAssembler
 		{
 			exceptionObj.printStackTrace();
 			GlobalUtil.stopExecutionWithError(exceptionObj.getMessage());
+		}
+		
+		/** Added for HFJVAdmin */
+		if(null!=constraintObj)
+		{
+			StringBuilder nameToBeSetBldr = new StringBuilder(constraintObj.getClass().getSimpleName());
+			
+			char firstChar = nameToBeSetBldr.charAt(0);
+			
+			nameToBeSetBldr.replace(0,1,String.valueOf(Character.toLowerCase(firstChar)));
+			
+			logger.info(THIS_METHOD_NAME + "setting a name ['"+
+													nameToBeSetBldr +"'] for constraintObj");
+			
+			constraintObj.setName(nameToBeSetBldr.toString());
+			
+			/* Just for GC purpose */
+			nameToBeSetBldr = null;
 		}
 
 		return constraintObj;

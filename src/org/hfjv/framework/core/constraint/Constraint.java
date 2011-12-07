@@ -1,5 +1,6 @@
 package org.hfjv.framework.core.constraint;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,9 +51,20 @@ import org.hfjv.framework.util.StringUtil;
  * @author M Raghavan alias Saravanan M
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class Constraint
+public  abstract class Constraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -7274372137353422799L;
 
+	/**
+	 * <p>
+	 * A private, class level logger instance
+	 * </p>
+	 */
 	private static Logger logger = LoggerFactory.getInstance().getLogger(Constraint.class);
 
 	/**
@@ -276,7 +288,7 @@ public class Constraint
 	public Object getNarrowedFieldValue(Field field)
 	throws ValidatorException
 	{
-		if(null==field || !(StringUtil.isValidString(field.getValue())))
+		if(null==field || StringUtil.isInvalidString(field.getValue()))
 		{
 			return null;
 		}
@@ -338,6 +350,41 @@ public class Constraint
 
 		logger.info("Constraint, evaluate() - fieldValue=["
 			+ getFieldValue(field) + "], valueToCheck["+ valueToCheck+"]");
+	}
+	
+	/**
+	 * <p>
+	 * A method to validate (self evaluation) of the <tt>constraint</tt> instance
+	 * wherein the subclasses can use this method to do a self-check on the <tt>valueToCheck</tt>
+	 * based on its own type.
+	 * </p>
+	 * <p>
+	 * It will be useful to prevent any unauthorized, not-allowed value being configured
+	 * for a <tt>Constraint</tt>
+	 * </p>
+	 * 
+	 * @throws ValidatorException 
+	 * 						any exceptions during the validation
+	 */
+	public abstract void selfEvaluate() throws ValidatorException;
+	
+	/**
+	 * <p>
+	 * This method evaluates the constraint's value and throws a 
+	 * <tt>ValidatorException</tt> if the value is <tt>invalid</tt> (null or empty)
+	 * </p>
+	 * 
+	 * @throws ValidatorException
+	 * 					if the value is found invalid, a validatorException is thrown
+	 */
+	public void evaluateConstraintForNonNullValue()
+	throws ValidatorException
+	{
+		if(StringUtil.isInvalidString(this.valueToCheck))
+		{
+			throw new ValidatorException("value of the constraint '"+this.getName()
+															+"' should not be left null or empty");
+		}
 	}
 
 	/**
@@ -449,7 +496,7 @@ public class Constraint
 		 * Ideally do nothing! No need to proceed further
 		 * with the constraint! :)
 		 */
-		if(!StringUtil.isValidString(value))
+		if(StringUtil.isInvalidString(value))
 		{
 			return;
 		}
@@ -802,7 +849,7 @@ public class Constraint
 		 * set its deferredEvaluation to true? -- Does not make sense!
 		 */
 		else if (field.isDeferredEvaluationFlagUpdated() &&
-				!(StringUtil.isValidString(field.getValue())))
+				StringUtil.isInvalidString(field.getValue()))
 		{
 			field.setDeferredEvaluation(true);
 		}
@@ -814,6 +861,14 @@ public class Constraint
 				+ (isDeferredFieldUpdated ? " to 'false'" : ""));
 
 		logger.exit(THIS_METHOD_NAME);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return " Name : "+this.getName() 
+				+ ", Value : " + this.getValueToCheck()
+				+ " [hashCode] :: "+this.hashCode();
 	}
 
 	/* Getter and Setter for errorDetails */

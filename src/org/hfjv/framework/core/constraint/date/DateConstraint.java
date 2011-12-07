@@ -5,7 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_DATE;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_DATE_CONSTRAINT;
 
-
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -28,9 +28,16 @@ import org.hfjv.framework.util.StringUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class DateConstraint extends Constraint
+public class DateConstraint extends Constraint implements Serializable
 {
 
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = 5099661723878872034L;
+	
 	/**
 	 * <p>
 	 * A private class level logger instance of this class
@@ -66,7 +73,7 @@ public class DateConstraint extends Constraint
 
 		String errorMsg = null;
 
-		if(!StringUtil.isValidString(actualValueOfField))
+		if(StringUtil.isInvalidString(actualValueOfField))
 		{
 			errorMsg = "Value of the field '"+ field.getDisplayName()
 																		+"' should NOT be null";
@@ -94,5 +101,17 @@ public class DateConstraint extends Constraint
 		if(null==dateObj)
 		{
 		}
+	}
+
+	@Override
+	public void selfEvaluate() throws ValidatorException
+	{
+		final String THIS_METHOD_NAME = "selfEvaluate() - ";
+		
+		logger.enter(THIS_METHOD_NAME);
+		
+		logger.info(THIS_METHOD_NAME + "As of now, not being used!");
+		
+		logger.exit(THIS_METHOD_NAME);
 	}
 }

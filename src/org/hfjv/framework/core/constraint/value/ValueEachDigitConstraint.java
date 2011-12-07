@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_VALUE_EACHDIGIT;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_VALUE_EACHDIGIT_CONSTRAINT;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.hfjv.framework.core.exception.ValidatorException;
@@ -22,8 +23,15 @@ import org.hfjv.framework.util.StringUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ValueEachDigitConstraint extends ValueConstraint
+public class ValueEachDigitConstraint extends ValueConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = 7693692107133015081L;
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor
@@ -89,7 +97,7 @@ public class ValueEachDigitConstraint extends ValueConstraint
 	{
 		boolean doesEachDigitMatch = true;
 
-		if(!StringUtil.isValidString(strVal))
+		if(StringUtil.isInvalidString(strVal))
 		{
 			return false;
 		}

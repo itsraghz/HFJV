@@ -1,5 +1,7 @@
 package org.hfjv.framework.core.exception;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * An <tt>Exception</tt> class, which would be thrown by HFJV
@@ -10,7 +12,7 @@ package org.hfjv.framework.core.exception;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ValidatorException extends Exception
+public class ValidatorException extends Exception implements Serializable
 {
 	/**
 	 * <p>

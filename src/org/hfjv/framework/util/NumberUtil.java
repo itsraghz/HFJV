@@ -49,7 +49,7 @@ public class NumberUtil
 	@SuppressWarnings("unused")
 	public static boolean isValidNumber(String str, String type)
 	{
-		if(!StringUtil.isValidString(str) || !StringUtil.isValidString(type))
+		if(StringUtil.isInvalidString(str) || StringUtil.isInvalidString(type))
 		{
 			return false;
 		}
@@ -115,11 +115,11 @@ public class NumberUtil
 	 * 		the <tt>String</tt> equivalent of a number
 	 *
 	 * @return
-	 *		true or fales depends on the actual value
+	 *		true or false depends on the actual value
 	 */
 	public static  boolean isValueMinusOne(String stringVal)
 	{
-		if(!StringUtil.isValidString(stringVal))
+		if(StringUtil.isInvalidString(stringVal))
 		{
 			return false;
 		}
@@ -155,5 +155,41 @@ public class NumberUtil
 		}
 
 		return isMinusOne;
+	}
+	
+	/**
+	 * <p>
+	 * This method returns true if the passed  number value is invalid; false otherwise.
+	 * </p>
+	 *
+	 * @param str
+	 * 			the numeric value passed as a <tt>java.lang.String</tt>
+	 * 
+	 * @return
+	 * 		a true/false indicating the status
+	 */
+	public static boolean isInvalidNumber(String str)
+	{
+		return !isValidNumber(str);
+	}
+	
+	/**
+	 * <p>
+	 * This method returns whether true if the passed number is invalid according to the
+	 * type supplied, else it returns false;
+	 * </p>
+	 *
+	 * @param str
+	 * 			the numeric value passed as a <tt>java.lang.String</tt>
+	 * 
+	 * @param type
+	 * 			the data type of the value being passed
+	 * 
+	 * @return
+	 * 			a true/false indicating the status
+	 */
+	public static boolean isInvalidNumber(String str, String type)
+	{
+		return !isValidNumber(str, type);
 	}
 }

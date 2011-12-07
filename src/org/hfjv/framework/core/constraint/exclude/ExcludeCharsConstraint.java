@@ -6,6 +6,7 @@ import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_EXCLUDECHARS_CONSTRAINT;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.hfjv.framework.core.constraint.Constraint;
@@ -23,8 +24,15 @@ import org.hfjv.framework.util.GlobalUtil;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class ExcludeCharsConstraint extends ExcludeConstraint
+public class ExcludeCharsConstraint extends ExcludeConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -6864458564025601493L;
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor

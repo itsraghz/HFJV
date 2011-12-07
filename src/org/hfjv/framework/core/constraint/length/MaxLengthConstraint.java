@@ -5,6 +5,7 @@ import static org.hfjv.framework.core.constants.MessageConstants.HFJV_KEY_ERROR_
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_FIELD_CONSTRAINT_LENGTH_MAX;
 import static org.hfjv.framework.core.constants.ValidatorKeyConstants.HFJV_INSERT_ORDER_MAXLENGTH_CONSTRAINT;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.hfjv.framework.core.exception.ValidatorException;
@@ -20,8 +21,16 @@ import org.hfjv.framework.helper.ExceptionHelper;
  * @author M Raghavan alias Saravanan
  * @since HFJV 1.0, 15 July 2011, Friday
  */
-public class MaxLengthConstraint extends LengthConstraint
+public class MaxLengthConstraint extends LengthConstraint implements Serializable
 {
+	/**
+	 * <p>
+	 * An IDE (Eclipse) generated <tt>serialVersionUID</tt>
+	 * </p>
+	 */
+	private static final long serialVersionUID = -5155129094679908632L;
+	
+
 	/**
 	 * <p>
 	 *  An overloaded, four argument constructor

@@ -146,7 +146,7 @@ public class DateUtil
 																	String dateFormat)
 	throws ValidatorException
 	{
-		if(!StringUtil.isValidString(dateFormat))
+		if(StringUtil.isInvalidString(dateFormat))
 		{
 			dateFormat = DEFAULT_DATE_PATTERN;
 		}
@@ -322,7 +322,7 @@ public class DateUtil
 			return outputDateValue;
 		}
 
-		if(!StringUtil.isValidString(outputDatePattern))
+		if(StringUtil.isInvalidString(outputDatePattern))
 		{
 			outputDatePattern = DEFAULT_DATE_OUTPUT_FORMAT;
 		}

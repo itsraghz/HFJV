@@ -70,7 +70,7 @@ public class ExceptionHelper
 
 	/**
 	 * <p>
-	 * This method returns an instance of <tt>ValidatorException<tt> based on the
+	 * This method returns an instance of <tt>ValidatorException</tt> based on the
 	 * passed arguments
 	 * </p>
 	 * 
@@ -169,7 +169,7 @@ public class ExceptionHelper
 		/* 2. Get from specific module level constraint,
 		 * if the errorCode obtained earlier is invalid!
 		 */
-		if(!StringUtil.isValidString(errorCode))
+		if(StringUtil.isInvalidString(errorCode))
 		{
 			//errorCode = getFrameworkGlobalErrorCodeValue();
 
@@ -183,7 +183,7 @@ public class ExceptionHelper
 		}
 
 		/* 3. Get from global module level configuration */
-		if(!StringUtil.isValidString(errorCode))
+		if(StringUtil.isInvalidString(errorCode))
 		{
 			errorCode = ValidatorAssembler.getGlobalModuleErrorMap().
 							get(constraint.getName());
@@ -194,7 +194,7 @@ public class ExceptionHelper
 
 
 		/* 4. Get from global level configuration */
-		if(!StringUtil.isValidString(errorCode))
+		if(StringUtil.isInvalidString(errorCode))
 		{
 			logger.debug(THIS_METHOD_NAME + " constraint name as key : "+
 								constraint.getName());
@@ -208,7 +208,7 @@ public class ExceptionHelper
 		}
 
 		/* 5. Get from the default value of the constraint instance */
-		if(!StringUtil.isValidString(errorCode))
+		if(StringUtil.isInvalidString(errorCode))
 		{
 			errorCode = constraint.getErrorInfo().getErrorCode();
 
@@ -221,7 +221,7 @@ public class ExceptionHelper
 	 	 * A final check : what if the configured value in the
 		 * hfjv-msg.properties also null OR invalid?
 		 */
-		if(!StringUtil.isValidString(errorCode))
+		if(StringUtil.isInvalidString(errorCode))
 		{
 			logger.info(THIS_METHOD_NAME + " NONE of the hierarchical constraints "
 				+ " for errorCode were true. Assigning -1 to errorCode...");
@@ -283,26 +283,26 @@ public class ExceptionHelper
 		/* 2. Get from specific module level constraint,
 		 * if the errorCode obtained earlier is invalid!
 		 */
-		if(!StringUtil.isValidString(errorDesc))
+		if(StringUtil.isInvalidString(errorDesc))
 		{
 			//errorCode = getFrameworkGlobalErrorCodeValue();
 			errorDesc = null;
 		}
 
 		/* 3. Get from global module level configuration */
-		if(!StringUtil.isValidString(errorDesc))
+		if(StringUtil.isInvalidString(errorDesc))
 		{
 			errorDesc = null;
 		}
 
 		/* 4. Get from global level configuration */
-		if(!StringUtil.isValidString(errorDesc))
+		if(StringUtil.isInvalidString(errorDesc))
 		{
 			errorDesc = getGlobalErrorDescConfigured();
 		}
 
 		/* 5. Get from the default value of the constraint instance */
-		if(!StringUtil.isValidString(errorDesc))
+		if(StringUtil.isInvalidString(errorDesc))
 		{
 			errorDesc = constraint.getErrorInfo().getErrorDesc();
 		}
@@ -326,7 +326,7 @@ public class ExceptionHelper
 
 		/* errorDesc = constraint.getErrorDesc(); */
 
-		if(!StringUtil.isValidString(errorDesc))
+		if(StringUtil.isInvalidString(errorDesc))
 		{
 			errorDesc = getFrameworkGlobalErrorDescValue();
 		}
