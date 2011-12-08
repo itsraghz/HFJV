@@ -565,12 +565,12 @@ public class ValidatorAssembler
 	private static String getKeyForModule(String moduleName, boolean includeField)
 	{
 		String keyForFieldsOfModule = HFJV_BASEKEY_WITH_SEPARATOR
-							+ moduleName;
+																				+ moduleName;
 
 		if(includeField)
 		{
 			keyForFieldsOfModule += HFJV_KEY_SEPARATOR
-							+ HFJV_BASEKEY_FIELD;
+																		+ HFJV_BASEKEY_FIELD;
 		}
 
 		return keyForFieldsOfModule;
@@ -678,8 +678,7 @@ public class ValidatorAssembler
 				if(CollectionUtil.isInvalidList(listOfFieldProps))
 				{
 					logger.info(THIS_METHOD_NAME + " SKIPPING the field ['"
-													+ fieldName + "'], as it looks like it is NOT "
-													+ " configured with any values for validation.");
+													+ fieldName + "'], as it appears to be left empty.");
 
 					continue;
 				}
